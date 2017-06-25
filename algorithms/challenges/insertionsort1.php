@@ -12,21 +12,21 @@ function printArray($ar){
 
 
 
-function  insertionSort($ar) {
+function  insertionSort($ar)
+{
     $inserted_element_index = count($ar) - 1;
     $last_element_index = $inserted_element_index - 1;
     $element_to_insert = $ar[$inserted_element_index];
 
-    for($i = $last_element_index ; $i >= 0 ; $i -= 1){
-        if($ar[$i] > $element_to_insert){
-            $ar[$i+1] = $ar[$i];
-        }else{
-            $ar[$i] = $element_to_insert;
-            $i=0;
-        }
-
+    for ($i = $last_element_index; $i >= 0; $i -= 1) {
+        $ar[$i + 1] = $ar[$i];
         echo printArray($ar);
+        if ($i == 0 || $ar[$i - 1] <= $element_to_insert ){
+            $ar[$i] = $element_to_insert;
+            $i = 0;
+        }
     }
+    echo printArray($ar);
 }
 
 
