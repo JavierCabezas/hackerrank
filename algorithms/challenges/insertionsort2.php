@@ -6,13 +6,11 @@
  * Time: 12:42 AM
  */
 
-function printArray($arr){
-    foreach($arr as $ar){
-        echo  implode(' ', $ar)."\n";
-    }
+function printArray($ar){
+    echo  implode(' ', $ar)."\n";
 }
 
-function  insertionSort($ar)
+function insertionSort($ar)
 {
     $inserted_element_index = count($ar) - 1;
     $last_element_index = $inserted_element_index - 1;
@@ -30,9 +28,12 @@ function  insertionSort($ar)
 
 function sortArray($ar){
     for($i = 0 ; $i < count($ar) ; $i+= 1){
-       // $ar = sortArray()
+        $element_to_sort = $ar[$i];
+        unset($ar[$i]);
+        array_push($ar, $element_to_sort);
+        $ar = insertionSort(array_values($ar));
+        printArray($ar);
     }
-  //  printArray($temp);
 }
 
 $fp = fopen("php://stdin", "r");
