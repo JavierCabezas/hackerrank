@@ -16,14 +16,16 @@ def quicksort(ar):
             else:
                 left.append(i)
 
-        return quicksort(left) + [ pivot ] + quicksort(right)
+        out = quicksort(left) + [ pivot ] + quicksort(right)
+        printArr(out)
+        return out
 
 def printArr(arr):
-    for temp in arr:
-       print(temp, end=' ')
+    if(len(arr) > 0):
+        for temp in arr:
+            print(temp, end=' ')
+        print("")
 
-#m = input()
-#ar = [int(i) for i in input().strip().split()]
-ar = [30, 22, 8 ,21, 2, 6, 26, 25, 27, 3, 16, 9, 20, 23, 12, 4, 24, 5, 29, 17, 15, 18, 28, 10, 19, 7, 1, 11, 14, 13]
+m = input()
+ar = [int(i) for i in input().strip().split()]
 sorted_array = quicksort(ar)
-print(sorted_array)
