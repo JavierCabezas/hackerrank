@@ -17,6 +17,3 @@ def has_cycle(head):
             node = advance_node(node)
 
     return True
-
-
-
