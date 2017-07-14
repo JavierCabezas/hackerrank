@@ -9,4 +9,4 @@ def postOrder(root):
         postOrder(root.left)
     if root.right is not None:
         postOrder(root.right)
-    print str(root.data),
+    print(str(root.data))
