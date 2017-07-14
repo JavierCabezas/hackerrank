@@ -4,29 +4,18 @@ self.left (the left child of the node)
 self.right (the right child of the node)
 self.data (the value of the node)"""
 
-nodes_per_position = {}
-
 def topView(root):
-    get_heights_and_positions(root)
-    for pos_x, nodes in nodes_per_position.items():
-        for node in nodes:
-            max_h = -1
-            if node[1] > max_h:
-                node_to_print = node[0]
-        print(node_to_print),
+    nodes = []
+    nodes.append(root.data)
 
+    current = root
+    while current.left is not None:
+        current = current.left
+        nodes.append(current.data)
 
-def get_heights_and_positions(root, pos_x = 0):
-    global nodes_per_position
-    hleft = hright = 0
-    if root.left is not None:
-        hleft = 1 + get_heights_and_positions(root.left, pos_x-1)
-    if root.right is not None:
-        hright = 1 + get_heights_and_positions(root.right, pos_x+1)
+    while root.right is not None:
+        root = root.right
+        nodes.append(root.data)
 
-    hnode = max(hleft, hright)
-    if not pos_x in nodes_per_position:
-        nodes_per_position[pos_x] = []
-    nodes_per_position[pos_x].append((root.data, hnode))
-
-    return hnode
+    for i in sorted(nodes):
+        print(i),
