@@ -21,8 +21,6 @@ class Complex(object):
         return Complex(self.r, (-1)*self.i)
     def mod(self):
         return Complex(math.sqrt(self.r ** 2 + self.i ** 2), 0)
-    def mod_real(self):
-        return self.mod().r
     def __str__(self):
         if self.i == 0:
             result = "%.2f+0.00i" % (self.r)
