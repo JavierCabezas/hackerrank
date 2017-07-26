@@ -1,20 +1,27 @@
-is_binary_tree = True
-def isBinaryTree(root, retval):
-    if retval is True:
+class Node:
+    def __init__(self, data, left = None, right = None):
+        self.data = data
+        self.left = left
+        self.right = right
 
-    if root.left is not None:
-        if root.data > root.left.data:
-            isBinaryTree(root.left, True):
-        else:
-            is_binary_tree = False
+root = Node(1, Node(2, Node(1), Node(3)),Node(6, Node(5), Node(7)))
 
-    if root.right is not None:
-        if root.data < root.right.data:
-            isBinaryTree(root.right)
-        else:
-            is_binary_tree = False
+MAX_VAL = 100000
+MIN_VAL = -100000
 
+def is_bst_recursive(root, min, max):
+    if root is None:
+        return True
+
+    if root.data < min or root.data > max:
+        return False
+
+    return is_bst_recursive(root.left, min, root.data-1) and is_bst_recursive(root.right, root.data+1, max)
 
 def checkBST(root):
-    isBinaryTree(root, True)
-    return is_binary_tree
+    if is_bst_recursive(root, MIN_VAL, MAX_VAL):
+        print('Yes')
+    else:
+        print('No')
+
+checkBST(root)
