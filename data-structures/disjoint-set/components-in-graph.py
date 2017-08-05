@@ -1,3 +1,6 @@
+import sys
+sys.setrecursionlimit(15000)
+
 class Graph:
     def __init__(self, value):
         self.value = value
@@ -23,4 +26,23 @@ for vertix in vertices:
 
     nodes[first_node_value].add_vertice(nodes[second_node_value])
 
-for node in nodes:
+def count_connected_nodes(father_node):
+    if father_node.was_visited:
+        return 0
+
+    father_node.was_visited = True
+    count = 1
+
+    for brother in father_node.nodes:
+        if not brother.was_visited:
+            count += count_connected_nodes(brother)
+
+    return count
+
+vertices = []
+for node in nodes.values():
+    connected = count_connected_nodes(node)
+    if connected > 0:
+        vertices.append(connected)
+
+print("{} {}".format(min(vertices), max(vertices)))
