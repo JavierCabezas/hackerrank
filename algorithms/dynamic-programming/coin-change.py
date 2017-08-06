@@ -1,14 +1,23 @@
-#total_ammount = int(input().split(" ")[0])
-#avaiable_coins = list(map(int, input().split(" ")))
+import sys
 
-combinations = []
-
-avaiable_coins = [1, 2, 5]
+total_ammount = int(input().split(" ")[0])
+avaiable_coins = list(map(int, input().split(" ")))
 avaiable_coins.sort()
-max_coin = max(avaiable_coins)
-min_coin = min(avaiable_coins)
+sys.setrecursionlimit(6000)
+
+class memoize(dict):
+    def __init__(self, func):
+        self.func = func
+
+    def __call__(self, *args):
+        return self[args]
+
+    def __missing__(self, key):
+        result = self[key] = self.func(*key)
+        return result
 
 
+@memoize
 def coin_combinations(remaining, last_index):
     if remaining == 0:
         return 1
@@ -17,11 +26,13 @@ def coin_combinations(remaining, last_index):
 
     for i, coin in enumerate(avaiable_coins[last_index:]):
         if remaining >= coin:
-            total += coin_combinations(
+            out = coin_combinations(
                 remaining - coin,
-                i
+                i + last_index,
             )
+            if out is not None:
+                total += out
 
     return total
 
-print(coin_combinations(5, 0))
+print(coin_combinations(total_ammount, 0))
