@@ -5,7 +5,7 @@ f = list(map(int, input().split(" ")))
 def get_average(arr):
     return sum(arr) / len(arr)
 
-def get_mean(arr):
+def get_median(arr):
     n = len(arr)
     if n % 2 == 0:
         return get_average([arr[n//2], arr[(n//2)-1]])
@@ -20,8 +20,8 @@ result.sort()
 first_half = result[:len(result)//2]
 second_half = result[-(len(result)//2):]
 
-q1 = get_mean(first_half)
-q3 = get_mean(second_half)
+q1 = get_median(first_half)
+q3 = get_median(second_half)
 
 iqr = q3 - q1
 print("%.1f" % iqr)
