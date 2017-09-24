@@ -2,9 +2,17 @@ class Heap:
     def __init__(self):
         self.data = []
 
+    def find_index(self, value_to_add):
+        for idx, data in enumerate(self.data):
+            if data > value_to_add:
+                return idx
+
+        return len(self.data)
+
     def add_element(self, value_to_add):
-        self.data.append(value_to_add)
-        self.data.sort()
+        index = self.find_index(value_to_add)
+        self.data.insert(index, value_to_add)
+
 
     def median(self):
         heap_len = len(self.data)
