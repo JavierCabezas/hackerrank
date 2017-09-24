@@ -1,38 +1,31 @@
-
-trie = {}
-END_WORD = '*'
+class TrieNode:
+    def __init__(self):
+        self.sons = {}
+        self.complete_words = 0
+        #self.is_word = False
+trie = TrieNode()
 
 
 def add_word_to_trie(word_to_add):
     current = trie
-    for letter in word_to_add + END_WORD:
-        if not letter in current:
-            current[letter] = {}
-        current = current[letter]
-
-
-def number_of_complete_words(current):
-    if current is None:
-        return 0
-
-    total = 0
-    for letter in current.keys():
-        if letter == END_WORD:
-            total += 1
-        else:
-            return total + number_of_complete_words(current[letter])
-    return total
+    for letter in word_to_add:
+        if not letter in current.sons:
+            current.sons[letter] = TrieNode()
+        current = current.sons[letter]
+        current.complete_words += 1
+    #current.is_word = True
 
 
 def find(word_to_find):
     current = trie
+
     for letter in word_to_find:
-        if letter in current:
-            current = current[letter]
+        if letter in current.sons:
+            current = current.sons[letter]
         else:
             return 0
 
-    return number_of_complete_words(current)
+    return current.complete_words
 
 n_operations = int(input())
 to_do = []
