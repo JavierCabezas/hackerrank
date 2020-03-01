@@ -1,9 +1,14 @@
-[number_of_elements, left_rotations] = [int(x) for x in input().split()]
-rota_array = [int(x) for x in input().split()]
+def rotLeft(elements, number_of_rotations):
+    number_of_elements = len(elements)
+    new_starting_index = number_of_elements + number_of_rotations
+    for _ in range(number_of_elements):
+        print(elements[new_starting_index % number_of_elements], end=" ")
+        new_starting_index += 1
 
-left_rotations =  left_rotations % number_of_elements
-rotated_array = [
-    rota_array[ ( number_of_elements + i + left_rotations ) % number_of_elements] for i in range(0, number_of_elements)
-]
 
-print(' '.join(map(str, rotated_array)))
+nd = input().split()
+number_of_elements = int(nd[0])
+number_of_rotations = int(nd[1])
+
+elements = list(map(int, input().rstrip().split()))
+result = rotLeft(elements, number_of_rotations)
